@@ -10,7 +10,8 @@ description: Ultimate VCF Phase 2. One convergent step that collapses brainstorm
 ## Step 1 — Converge on the shape
 
 - For novel work, run `superpowers:brainstorming` to explore intent → 2-3 alternative shapes → the picked one with tradeoffs. (Well-understood incremental work can skip straight to criteria.)
-- Stress-test vocabulary against the domain model with `grill-with-docs` (or `grill-me-joey` for Joey tone). Lock terms into `CONTEXT.md` / glossary as decisions crystallise.
+- **For user-facing work, run `user-first-thinking` first** — ground the problem and the acceptance criteria in the actual end-user's need (ICP empathy, real workflow), not in what's convenient to implement. Skip for internal/infra work that has no end-user surface.
+- **Grill the design against the documented domain model with `grill-with-docs`** (the canonical UVCF grill) — it stress-tests the plan against `CONTEXT.md` / ADRs / glossary and updates those docs inline as decisions crystallise, so terminology and prior decisions stay coherent.
 - Per the project rule: **grilling questions go through `AskUserQuestion`, never prose.**
 
 ## Step 2 — Lock acceptance criteria
