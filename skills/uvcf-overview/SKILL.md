@@ -52,13 +52,15 @@ The tier decides which phases run. SCOPE-LOCK writes the chosen set to `.vcf/<sl
 
 ## Autoresearch mode (optional)
 
-Use this only when a slice's success criterion is a **measurable metric to optimize** (eval accuracy, p95 latency, test-pass-rate, tool-selection score) rather than a fixed behavior to implement. Instead of a one-shot BUILD, run an autonomous optimization loop — Karpathy's `autoresearch` pattern (reference clone at `~/Projects/autoresearch`; read its `program.md`):
+Use this only when a slice's success criterion is a **measurable metric to optimize** (eval accuracy, p95 latency, test-pass-rate, tool-selection score) rather than a fixed behavior to implement. Instead of a one-shot BUILD, run an autonomous optimization loop. The mechanics below are lifted from Karpathy's `autoresearch` `program.md` (reference clone at `~/Projects/autoresearch` — read it):
 
-- **Fixed budget per experiment** (time or token), so runs are directly comparable.
-- **Accept only if the metric improves; discard otherwise** — the same accept-on-evidence rule as verifier-gates-acceptance, made autonomous.
-- **Log every experiment + accumulate learnings** so the next iteration is smarter (feeds the decision-ledger / framework-retro).
+- **Frozen, external evaluator = ground truth.** The metric and its harness are read-only; the loop edits the *implementation*, never the evaluator. This is the anti-gaming rule and the deepest tie to verifier-gates-acceptance — the metric is never self-graded. (autoresearch: `evaluate_bpb` lives in the un-editable `prepare.py`.)
+- **Fixed budget per experiment** (time or tokens) → every experiment is directly comparable regardless of what changed.
+- **git *is* the accept/discard.** Commit each experiment on a `autoresearch/<tag>`-style branch; if the metric improves, keep the commit and advance; if equal-or-worse, `git reset` back. First run = establish the baseline.
+- **Append-only ledger** (`results.tsv`-style: `commit | metric | cost | status(keep/discard/crash) | description`, untracked) so learnings accumulate and feed the decision-ledger / framework-retro.
+- **Crash handling = bounded.** Trivial fix → retry; otherwise log `crash` and move on after a few attempts (the same 2-strike escalation discipline). Apply the simplicity criterion: a tiny gain that adds ugly complexity isn't worth it; a gain from *deleting* code always is.
 
-On Joey this is the existing `/auto-research <target>` framework (`.auto-research/`, target types: criteria-check / test-pass-rate / skill-trigger); pair with `/ralph-loop` for unattended overnight runs. It slots in as the BUILD phase for metric-driven slices (PLAN-CHECK still locks the metric + budget; CONFIRM/VERIFY still gate the winning experiment). Optional — most slices are behavior-driven and use normal BUILD.
+On Joey this is the existing `/auto-research <target>` framework (`.auto-research/`, target types: criteria-check / test-pass-rate / skill-trigger); pair with `/ralph-loop` for unattended overnight runs. It slots in as the BUILD phase for metric-driven slices (PLAN-CHECK still locks the metric + budget + frozen evaluator; CONFIRM/VERIFY still gate the winning experiment). Optional — most slices are behavior-driven and use normal BUILD.
 
 ## Kept backbone (always-on, not steps)
 

@@ -1,6 +1,6 @@
 {
   "name": "ultimate-vcf",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Ultimate VCF \u2014 a rebuilt Vibe Coder Framework. An 8-phase loop (scope-lock \u2192 ground \u2192 shape \u2192 plan-check \u2192 build \u2192 confirm \u2192 verify \u2192 compound) whose plan\u2192build\u2192confirm spine kills the build\u2194audit moral hazard: the verifier gates acceptance (build proves before handoff), the confirm loop is bounded at 2 strikes, and a learning spine (decision-ledger + slice self-eval + framework-retro + incident\u2192regression-test) makes the framework itself compound. Keeps the 6-tier system, Boil-the-Ocean, and Karpathy rules. v0.2.0 adds a physical enforcement layer (handoff.sh writes a diff-bound .proof; confirm audits the proof) \u2014 the LLM-council's unanimous hardening so the verifier gate can't be satisfied by prompt compliance alone.",
   "author": {
     "name": "Toki Wilkinson",
