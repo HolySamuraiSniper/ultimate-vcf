@@ -20,7 +20,7 @@ Read the request. Place it on the 6-tier scale from scope signals (files touched
 | **3 — Medium** ⭐ default | multi-file, real design decisions, half–1 day | full spine: `scope-lock → ground → shape → plan-check → build → confirm → verify → compound` |
 | **4 — Grindy** | 5+ similar items (per-provider, batch) | `ground → shape → plan-check`, then Ralph runs `build → confirm` per item, `verify → compound` at the end |
 | **5 — Security-critical** | auth, RLS, OAuth, payment, multi-tenancy | full spine; CONFIRM uses `/codex challenge`; VERIFY adds `gsd-security-auditor` + `pr-review-toolkit:silent-failure-hunter` |
-| **6 — Milestone** | multi-week, novel architecture | GSD outline scaffolding (`gsd-new-milestone`/`gsd-new-phase`) wrapping a Tier-3 spine per vertical slice |
+| **6 — Milestone** | multi-week, novel architecture | GSD outline scaffolding (`gsd-new-milestone`/`gsd-add-phase`) wrapping a Tier-3 spine per vertical slice |
 
 If you're between tiers, pick the higher one. Boil-the-Ocean: don't under-scope to save effort.
 
