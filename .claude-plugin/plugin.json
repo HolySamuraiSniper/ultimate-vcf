@@ -1,0 +1,10 @@
+{
+  "name": "ultimate-vcf",
+  "version": "0.1.0",
+  "description": "Ultimate VCF — a rebuilt Vibe Coder Framework. An 8-phase loop (scope-lock → ground → shape → plan-check → build → confirm → verify → compound) whose plan→build→confirm spine kills the build↔audit moral hazard: the verifier gates acceptance (build proves before handoff), the confirm loop is bounded at 2 strikes, and a learning spine (decision-ledger + slice self-eval + framework-retro + incident→regression-test) makes the framework itself compound. Keeps the 6-tier system, Boil-the-Ocean, and Karpathy rules.",
+  "author": { "name": "Toki Wilkinson", "email": "toki@lykkeligai.dk" },
+  "homepage": "https://github.com/HolySamuraiSniper/ultimate-vcf",
+  "repository": "https://github.com/HolySamuraiSniper/ultimate-vcf",
+  "license": "MIT",
+  "keywords": ["workflow", "tdd", "code-review", "vcf", "self-improving", "verifier-gates-acceptance", "claude-code"]
+}

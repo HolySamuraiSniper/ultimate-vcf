@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ultimate-vcf",
+  "description": "Ultimate VCF — rebuilt Vibe Coder Framework. 8-phase loop with verifier-gates-acceptance, a bounded confirm loop, and a self-improving learning spine.",
+  "owner": { "name": "Toki Wilkinson", "email": "toki@lykkeligai.dk" },
+  "plugins": [
+    {
+      "name": "ultimate-vcf",
+      "description": "8 phase commands (/ultimate-vcf:uvcf-scope-lock, :uvcf-ground, :uvcf-shape, :uvcf-plan-check, :uvcf-build, :uvcf-confirm, :uvcf-verify, :uvcf-compound) + :uvcf-overview reference. Fixes the build↔audit moral hazard via verifier-gates-acceptance + a 2-strike loop bound; adds a decision-ledger / slice self-eval / framework-retro learning spine. Mines SICA, Eidentic, Ivy Tendril, Hive, Hermes, plus superpowers / GSD / BMAD / ecc / Karpathy.",
+      "author": { "name": "Toki Wilkinson", "email": "toki@lykkeligai.dk" },
+      "category": "development",
+      "source": "./",
+      "homepage": "https://github.com/HolySamuraiSniper/ultimate-vcf"
+    }
+  ]
+}
