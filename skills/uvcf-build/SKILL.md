@@ -41,6 +41,8 @@ Then complete the proof — these are checkable, not vibes:
 
 > **Why a script, not just a prompt:** prompt-level discipline is the floor; `handoff.sh` is the teeth. It was the LLM-council's unanimous #1 hardening — "turn prompt-level promises into physical CI-like boundaries the AI cannot bypass." The self-score alone is rubber-stamp theater; binding it to real piped output + a diff hash that CONFIRM re-checks is what makes it real.
 
+> **Make it un-bypassable (optional, recommended once you trust the loop):** `handoff.sh` is still a script the builder is *told* to run. To make the *commit itself* refuse unless a fresh, diff-matching `.proof` exists, install the pre-commit gate once per project: `bash "<this skill dir>/install-uvcf-hook.sh" /path/to/repo`. It fires ONLY when a `.vcf/<slug>` slice is awaiting confirm (silent otherwise), and `git commit --no-verify` is the deliberate escape hatch. Caveat: don't install it into a repo with many parallel agent sessions committing on one shared tree without coordinating — it gates every committer.
+
 ## Step 4 — Record
 
 Append `.vcf/<slug>/BUILD-NOTES.md` with: the slice, the `.proof` path (`.vcf/<slug>/proof/slice-<N>.proof`), the criterion→test map, and the self-eval scores. Log any non-trivial decisions to `LEDGER.md` (supersede contradicted ones). **Update `STATUS.md`** `Current phase:` to `build · slice N proven, awaiting confirm` — in gate mode the next `/uvcf-confirm` reads STATUS.md to learn which slice it is confirming, so this write-back is mandatory.

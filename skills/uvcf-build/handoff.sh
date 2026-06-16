@@ -42,8 +42,11 @@ PROOF_FILE="${PROOF_DIR}/slice-${SLICE}.proof"
 TMP="$(mktemp)"
 trap 'rm -f "$TMP"' EXIT
 
-# Bind the proof to the exact code state. Tracked + staged + unstaged diff.
-DIFF_SHA="$(git diff HEAD 2>/dev/null | shasum -a 256 | awk '{print $1}')"
+# Bind the proof to the exact CODE state, EXCLUDING .vcf/ bookkeeping — so that
+# writing this proof file (under .vcf/) does not itself perturb the hash. Make
+# untracked code visible to the diff via intent-to-add (non-destructive).
+git add -N -- . ':(exclude).vcf' >/dev/null 2>&1 || true
+DIFF_SHA="$(git diff HEAD -- . ':(exclude).vcf' 2>/dev/null | shasum -a 256 | awk '{print $1}')"
 [ -z "$DIFF_SHA" ] && DIFF_SHA="no-git-or-no-changes"
 
 FAILED=0
