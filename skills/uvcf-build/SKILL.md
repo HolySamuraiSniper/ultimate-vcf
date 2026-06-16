@@ -7,6 +7,8 @@ description: Ultimate VCF Phase 4 — build one vertical slice with RED→GREEN 
 
 **This phase carries the core fix for the build↔audit moral hazard.** The old VCF let build hand unverified work to audit, so build was rationally sloppy and slices ping-ponged. Here, **the verifier gates acceptance**: a slice only advances if it has already proven itself. Build owns correctness; CONFIRM then merely confirms.
 
+> **Metric-driven slice?** If this slice's goal is to *optimize a measurable number* (eval accuracy, latency, pass-rate) rather than implement a fixed behavior, consider **Autoresearch mode** (see `uvcf-overview`): an autonomous accept-only-if-the-metric-improves loop via Joey's `/auto-research` + `/ralph-loop`. Otherwise proceed with normal RED→GREEN→PROVE below.
+
 ## Step 1 — Read first
 
 - `.vcf/<slug>/PLAN.md` + `STATUS.md` to find the current slice and its acceptance criteria.

@@ -50,6 +50,16 @@ The tier decides which phases run. SCOPE-LOCK writes the chosen set to `.vcf/<sl
 - **In-session** (Tier 1–2): walk the chosen phases inline in one chat.
 - **Gate mode** (Tier 3+, default): one command per phase, `/clear` between phases so each runs in fresh context — this is what makes CONFIRM and PLAN-CHECK genuinely independent.
 
+## Autoresearch mode (optional)
+
+Use this only when a slice's success criterion is a **measurable metric to optimize** (eval accuracy, p95 latency, test-pass-rate, tool-selection score) rather than a fixed behavior to implement. Instead of a one-shot BUILD, run an autonomous optimization loop — Karpathy's `autoresearch` pattern (reference clone at `~/Projects/autoresearch`; read its `program.md`):
+
+- **Fixed budget per experiment** (time or token), so runs are directly comparable.
+- **Accept only if the metric improves; discard otherwise** — the same accept-on-evidence rule as verifier-gates-acceptance, made autonomous.
+- **Log every experiment + accumulate learnings** so the next iteration is smarter (feeds the decision-ledger / framework-retro).
+
+On Joey this is the existing `/auto-research <target>` framework (`.auto-research/`, target types: criteria-check / test-pass-rate / skill-trigger); pair with `/ralph-loop` for unattended overnight runs. It slots in as the BUILD phase for metric-driven slices (PLAN-CHECK still locks the metric + budget; CONFIRM/VERIFY still gate the winning experiment). Optional — most slices are behavior-driven and use normal BUILD.
+
 ## Kept backbone (always-on, not steps)
 
 - **Boil-the-Ocean** scope discipline + the 5 banned anti-patterns — invoke `boil-the-ocean` to reset mid-loop.
