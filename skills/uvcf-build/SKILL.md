@@ -1,6 +1,6 @@
 ---
 name: uvcf-build
-description: Ultimate VCF Phase 4 — build one vertical slice with RED→GREEN then PROVE. The verifier gates acceptance — a slice that fails its own tests, self-eval, or acceptance criteria does NOT advance to confirm. Build owns correctness so the reviewer confirms rather than corrects. Use after plan-check, or "uvcf build slice N of X". Runs once per slice; in gate mode, expect /clear + /uvcf-confirm between slices.
+description: Ultimate VCF Phase 4 — build one vertical slice with RED→GREEN then PROVE. The verifier gates acceptance — a slice that fails its own tests, self-eval, or acceptance criteria does NOT advance to confirm. Build owns correctness so the reviewer confirms rather than corrects. Use after plan-check, or "uvcf build slice N of X". Runs once per slice; in gate mode, expect /clear + /ultimate-vcf:uvcf-confirm between slices.
 ---
 
 # Ultimate VCF — Phase 4: BUILD + PROVE
@@ -45,11 +45,11 @@ Then complete the proof — these are checkable, not vibes:
 
 ## Step 4 — Record
 
-Append `.vcf/<slug>/BUILD-NOTES.md` with: the slice, the `.proof` path (`.vcf/<slug>/proof/slice-<N>.proof`), the criterion→test map, and the self-eval scores. Log any non-trivial decisions to `LEDGER.md` (supersede contradicted ones). **Update `STATUS.md`** `Current phase:` to `build · slice N proven, awaiting confirm` — in gate mode the next `/uvcf-confirm` reads STATUS.md to learn which slice it is confirming, so this write-back is mandatory.
+Append `.vcf/<slug>/BUILD-NOTES.md` with: the slice, the `.proof` path (`.vcf/<slug>/proof/slice-<N>.proof`), the criterion→test map, and the self-eval scores. Log any non-trivial decisions to `LEDGER.md` (supersede contradicted ones). **Update `STATUS.md`** `Current phase:` to `build · slice N proven, awaiting confirm` — in gate mode the next `/ultimate-vcf:uvcf-confirm` reads STATUS.md to learn which slice it is confirming, so this write-back is mandatory.
 
 ## Step 5 — Hand off
 
-State the slice is PROVEN and ready for independent confirmation. In gate mode, tell the user to `/clear` then `/uvcf-confirm <slug> slice <N>`. One slice per invocation.
+State the slice is PROVEN and ready for independent confirmation. In gate mode, tell the user to `/clear` then `/ultimate-vcf:uvcf-confirm <slug> slice <N>`. One slice per invocation.
 
 ---
 

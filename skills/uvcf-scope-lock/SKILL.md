@@ -56,6 +56,6 @@ Silent skipping is banned. If you catch yourself about to jump a phase without l
 
 Tell the user the locked set and the next command, e.g.:
 
-> Tier 3 locked. Phases: ground → shape → plan-check → build → confirm → verify → compound (gate mode). Next: `/uvcf-ground <slug>`.
+> Tier 3 locked. Phases: ground → shape → plan-check → build → confirm → verify → compound (gate mode). Next: `/ultimate-vcf:uvcf-ground <slug>`.
 
 Then stop. SCOPE-LOCK writes STATUS.md and advances state by one; it does not do the next phase's work.

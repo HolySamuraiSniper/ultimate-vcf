@@ -34,4 +34,4 @@ Fold what it surfaces back into the criteria. This pass is cheap now and expensi
 
 ## Step 4 — Output
 
-Write `.vcf/<slug>/PRD.md` (user stories, acceptance criteria, in/out scope, non-goals, metrics). Log scope decisions to `.vcf/<slug>/LEDGER.md`. Update STATUS.md `Current phase:`. Hand off to `/uvcf-plan-check <slug>`.
+Write `.vcf/<slug>/PRD.md` (user stories, acceptance criteria, in/out scope, non-goals, metrics). Log scope decisions to `.vcf/<slug>/LEDGER.md`. Update STATUS.md `Current phase:`. Hand off to `/ultimate-vcf:uvcf-plan-check <slug>`.

@@ -44,4 +44,4 @@ If gaps come back: revise the plan and re-check. **Max 3 revision rounds.** If t
 
 ## Step 5 — Output
 
-Once it passes, stamp `PLAN.md` with `Readiness: READY`. Log key architecture decisions to LEDGER.md. Update STATUS.md. Hand off to `/uvcf-build <slug>` (slice 1).
+Once it passes, stamp `PLAN.md` with `Readiness: READY`. Log key architecture decisions to LEDGER.md. Update STATUS.md. Hand off to `/ultimate-vcf:uvcf-build <slug>` (slice 1).

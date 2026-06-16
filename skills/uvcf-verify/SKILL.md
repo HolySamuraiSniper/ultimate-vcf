@@ -31,4 +31,4 @@ Catch what per-slice confirm structurally cannot see:
 
 ## Step 5 — Output and routing
 
-Write `.vcf/<slug>/VERIFY.md` with the criterion-by-criterion result and any drift found. Failures route back to `/uvcf-plan-check` (re-plan the gap) or a targeted `/uvcf-build` slice — **not** into an unbounded fix loop here. On PASS, hand off to `/uvcf-compound <slug>`.
+Write `.vcf/<slug>/VERIFY.md` with the criterion-by-criterion result and any drift found. Failures route back to `/ultimate-vcf:uvcf-plan-check` (re-plan the gap) or a targeted `/ultimate-vcf:uvcf-build` slice — **not** into an unbounded fix loop here. On PASS, hand off to `/ultimate-vcf:uvcf-compound <slug>`.

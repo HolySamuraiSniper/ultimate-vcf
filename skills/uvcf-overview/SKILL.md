@@ -21,14 +21,14 @@ Ultimate VCF moves that rule into the loop:
 
 | # | Phase | Command | Purpose | Fixes |
 |---|---|---|---|---|
-| 0 | **SCOPE-LOCK** | `/uvcf-scope-lock` | Assess tier, choose the exact phase-set, write it to STATUS.md | ad-hoc step-skipping |
-| 1 | **GROUND** | `/uvcf-ground` | Retrieve prior context (memory, git, docs, dangling threads); seed the ledger | slop-from-no-context |
-| 2 | **SHAPE** | `/uvcf-shape` | Brainstorm + grill + PRD collapsed → locked testable acceptance criteria | early-step overlap |
-| 3 | **PLAN-CHECK** | `/uvcf-plan-check` | Plan, then an independent checker confirms build can't improvise | moral hazard (upstream) |
-| 4 | **BUILD** | `/uvcf-build` | Red→Green then **PROVE**; verifier gates acceptance | moral hazard (downstream) |
-| 5 | **CONFIRM** | `/uvcf-confirm` | One independent reviewer, diff-only; max 2 rounds then escalate | the loop + gate overlap |
-| 6 | **VERIFY** | `/uvcf-verify` | Whole-feature goal-backward UAT; rewards outcome not steps | integration drift |
-| 7 | **COMPOUND** | `/uvcf-compound` | Ship + write back feature memory, ledger, **framework retro** | doesn't compound/learn |
+| 0 | **SCOPE-LOCK** | `/ultimate-vcf:uvcf-scope-lock` | Assess tier, choose the exact phase-set, write it to STATUS.md | ad-hoc step-skipping |
+| 1 | **GROUND** | `/ultimate-vcf:uvcf-ground` | Retrieve prior context (memory, git, docs, dangling threads); seed the ledger | slop-from-no-context |
+| 2 | **SHAPE** | `/ultimate-vcf:uvcf-shape` | Brainstorm + grill + PRD collapsed → locked testable acceptance criteria | early-step overlap |
+| 3 | **PLAN-CHECK** | `/ultimate-vcf:uvcf-plan-check` | Plan, then an independent checker confirms build can't improvise | moral hazard (upstream) |
+| 4 | **BUILD** | `/ultimate-vcf:uvcf-build` | Red→Green then **PROVE**; verifier gates acceptance | moral hazard (downstream) |
+| 5 | **CONFIRM** | `/ultimate-vcf:uvcf-confirm` | One independent reviewer, diff-only; max 2 rounds then escalate | the loop + gate overlap |
+| 6 | **VERIFY** | `/ultimate-vcf:uvcf-verify` | Whole-feature goal-backward UAT; rewards outcome not steps | integration drift |
+| 7 | **COMPOUND** | `/ultimate-vcf:uvcf-compound` | Ship + write back feature memory, ledger, **framework retro** | doesn't compound/learn |
 
 Kaizen (continuous refactor) and sprint (parallelism) are **practices inside phases**, not steps.
 

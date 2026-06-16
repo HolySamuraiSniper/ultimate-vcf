@@ -36,4 +36,4 @@ When grounding on the Joey codebase, surface these in the ledger if the work tou
 
 ## Hand off
 
-Summarise the 3 things + assumptions, confirm LEDGER.md seeded, point to the next phase (`/uvcf-shape <slug>` for Tier 3+, or `/uvcf-build` if the locked set skips shape/plan-check). Stop.
+Summarise the 3 things + assumptions, confirm LEDGER.md seeded, point to the next phase (`/ultimate-vcf:uvcf-shape <slug>` for Tier 3+, or `/ultimate-vcf:uvcf-build` if the locked set skips shape/plan-check). Stop.
