@@ -24,6 +24,8 @@ Write to `.vcf/<slug>/PLAN.md`.
 
 Each slice in the plan must carry **its own acceptance criteria + the architecture notes needed to build it**. The test: *could a fresh builder execute this slice without guessing?* If a slice would force a design decision at build time, that decision belongs here, now.
 
+**Proof-plan (per slice) — declared before any code.** Each slice also states *how it will prove itself*: the exact test names/assertions that will cover each acceptance criterion, and the proof commands `handoff.sh` will run (typecheck/test/lint/eval). This is a commitment device — the builder builds *toward* the proof instead of retrofitting a passing self-score to whatever it happened to write (the LLM-council's anti-rubber-stamp fix). The readiness gate (Step 3) checks the proof-plan exists and every criterion maps to a named test; a slice whose criteria can't be expressed as a test is a signal it's under-specified or belongs in exploratory mode, not this loop.
+
 ## Step 3 — The readiness gate (plan-checker)
 
 Hand the plan to an **independent reviewer in fresh context** — `Plan` agent or `feature-dev:code-architect`. Give it PRD.md + PLAN.md. It verifies:
@@ -32,6 +34,7 @@ Hand the plan to an **independent reviewer in fresh context** — `Plan` agent o
 2. No slice requires improvisation (the dev-story standard).
 3. Slices are vertical, not horizontal.
 4. Interfaces between slices are defined.
+5. **Every slice has a proof-plan** — each acceptance criterion maps to a named test/assertion, and the `handoff.sh` proof commands are listed. (No proof-plan = not READY.)
 
 It returns **READY** or a specific **gap list**.
 

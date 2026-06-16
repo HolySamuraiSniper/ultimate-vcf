@@ -20,21 +20,30 @@ Use `superpowers:test-driven-development` (or `/tdd`):
 2. Run them; **watch them fail** (if you didn't see it fail, you don't know it tests the right thing).
 3. Write the *minimal* code to green. Karpathy: simplest thing that works, surgical changes only.
 
-## Step 3 — PROVE (verifier-gates-acceptance — non-negotiable)
+## Step 3 — PROVE (verifier-gates-acceptance — the gate)
 
-Before this slice may advance to CONFIRM, ALL of the following must hold. This is the gate.
+Build does not hand work to CONFIRM on a promise — it hands a **proof artifact bound to the exact code**. Run the enforcement script (`handoff.sh`, in this skill's directory). It executes each proof command, captures the REAL combined stdout/stderr, stamps a `DIFF_SHA256` of `git diff HEAD`, and writes `.vcf/<slug>/proof/slice-<N>.proof` **only if every command exits 0** — otherwise it exits non-zero and writes nothing, so a failing slice physically cannot advance:
 
-1. **Run the proof commands and paste the actual output** — tests, typecheck, lint, and any relevant evals. Evidence before claims (`superpowers:verification-before-completion`). "Should pass" is not proof; pasted green output is.
-2. **Self-score 5 axes with evidence** (`agent-self-evaluation`), at this slice boundary (the Hermes cadence — pause and self-evaluate, don't wait for the end). Use `templates/SELF-EVAL.md`. Any axis < 5 must cite concrete evidence and get a fix:
-   - accuracy · completeness · clarity · surgical-ness · no-placeholders
-3. **No placeholders** (`full-output-enforcement`): no `// ...`, no "similar to above", no half-finished impls that pass tests without doing the work. Every changed line traces to this slice.
-4. **Acceptance-criteria check**: each criterion for this slice is demonstrably met (point at the test or behaviour that proves it).
+```bash
+bash "<dir of this SKILL.md>/handoff.sh" --slug <slug> --slice <N> -- \
+  "<typecheck cmd>" "<test cmd>" "<lint cmd>" "<eval cmd if any>"
+```
 
-**If any of the four fails, the slice does NOT advance.** Fix it now, in BUILD. Build does not hand broken or unproven work to CONFIRM. (This is SICA's rule: a change is accepted only if it passes verification; a failing change is fixed or discarded, never passed downstream.)
+The commands come from the slice's **proof-plan**, locked in PLAN-CHECK (so you build *toward* the proof, not retrofit a score). Joey example: `"pnpm typecheck" "pnpm test:precommit" "pnpm lint"` (+ `"pnpm test:eval"` / `"pnpm test schema-budget"` when relevant).
+
+Then complete the proof — these are checkable, not vibes:
+
+1. **Criterion → test map.** For each acceptance criterion of this slice, name the passing test/assertion that proves it (`Criterion 2 ✓ — auth.test.ts::rejects_expired_token`). A criterion with no named test is **not met**.
+2. **Self-score the 5 axes with cited evidence** (`agent-self-evaluation`) into `templates/SELF-EVAL.md` — accuracy · completeness · clarity · surgical-ness · no-placeholders. Make checks binary where possible (`grep -rn 'TODO\|FIXME\|XXX' <changed files>` → 0). Any axis < 5 cites file/line evidence and gets fixed now.
+3. **No placeholders** (`full-output-enforcement`): no `// ...`, no "similar to above", no impl that passes tests without doing the work.
+
+**If `handoff.sh` exits non-zero, OR any criterion lacks a named passing test, the slice does NOT advance.** Fix it now, in BUILD. Build never hands broken or unproven work to CONFIRM. (SICA: a change is accepted only if it passes verification; a failing change is fixed or discarded, never passed downstream.)
+
+> **Why a script, not just a prompt:** prompt-level discipline is the floor; `handoff.sh` is the teeth. It was the LLM-council's unanimous #1 hardening — "turn prompt-level promises into physical CI-like boundaries the AI cannot bypass." The self-score alone is rubber-stamp theater; binding it to real piped output + a diff hash that CONFIRM re-checks is what makes it real.
 
 ## Step 4 — Record
 
-Append `.vcf/<slug>/BUILD-NOTES.md` with: the slice, the pasted proof output, the self-eval scores. Log any non-trivial decisions to `LEDGER.md` (supersede contradicted ones). **Update `STATUS.md`** `Current phase:` to `build · slice N proven, awaiting confirm` — in gate mode the next `/uvcf-confirm` reads STATUS.md to learn which slice it is confirming, so this write-back is mandatory.
+Append `.vcf/<slug>/BUILD-NOTES.md` with: the slice, the `.proof` path (`.vcf/<slug>/proof/slice-<N>.proof`), the criterion→test map, and the self-eval scores. Log any non-trivial decisions to `LEDGER.md` (supersede contradicted ones). **Update `STATUS.md`** `Current phase:` to `build · slice N proven, awaiting confirm` — in gate mode the next `/uvcf-confirm` reads STATUS.md to learn which slice it is confirming, so this write-back is mandatory.
 
 ## Step 5 — Hand off
 
